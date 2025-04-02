@@ -38,22 +38,18 @@ export default function Countries(){
     // const temp = [1,2,3,4,5,6];
     const[countries,setCountries]=useState([]);
 
-useEffect( ()=>{
-  try {
-     const fetchData=async()=>{
-      const resp=await fetch(API_ENDPOINT);
-      const jSonRes=await resp.json();
-        setCountries(jSonRes);
-     } 
-
-     fetchData();
-    
-  } catch (error) {
-    console.error("Error fetching data: " + error);
-  }  
- 
-
-},[])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resp = await fetch(API_ENDPOINT);
+                const jSonRes = await resp.json();
+                setCountries(jSonRes);
+            } catch (error) {
+                console.error("Error fetching data: " + error.message);
+            }
+        };
+        fetchData();
+    }, []);
     return (
     <div style={{
     display:"flex",
